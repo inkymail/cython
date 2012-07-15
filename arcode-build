@@ -1,0 +1,5 @@
+#!/bin/zsh
+cd cython
+python ./setup.py build
+cd ..
+echo "You now need to add " `pwd`/cython " to your PYTHONPATH in your .zshrc file."
