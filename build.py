@@ -8,61 +8,18 @@
 # dmb - July 2012 - Copyright (C) 2012 Arcode Corporation
 #
 import os
-import sys
-import time
-import subprocess
-from multiprocessing import cpu_count
-
-def mkdirs(pathname):
-    (head, tail) = os.path.split(pathname)
-    try:
-        # Make sure the path exists
-        os.makedirs(head)
-    except:
-        pass
-
-def run(*args, **kw):
-    ignore_errors = kw.get('ignore_errors', False)
-    env = {}
-    env.update(os.environ)
-    if 'env' in kw:
-        env.update(kw['env'])
-
-    print "build.py: running command '%s'" % " ".join(args)
-    process = subprocess.Popen(args, shell=False, env=env)
-    while True:
-        process.poll()
-        if process.returncode == 0:
-            break
-        if process.returncode is not None:
-            if ignore_errors:
-                break
-            print "returncode = %s" % process.returncode
-            exit(process.returncode)
-        time.sleep(0.25)
+from build_utils import *
 
 if __name__ == '__main__':
-    arcode_root = subprocess.Popen(["arcode", "-r"], stdout=subprocess.PIPE).communicate()[0].strip()
-    platform = subprocess.Popen(["arcode", "-P"], stdout=subprocess.PIPE).communicate()[0].strip()
-    env = {}
+    # Parse command line args
+    results = make_arg_parser_and_parse("build Cython")
 
-    if platform == 'osx':
-        # This must be set to the lowest OS X version we want to support.
-        env.update({ 'MACOSX_DEPLOYMENT_TARGET': '10.6' })
-
-        #
-        # We generally want a pure i386 binary for OS X, since Python memory usage is approximately
-        # halved with a 32-bit binary and we get no real value out of the 64-bit build. The other
-        # options are here for reference.
-        #
-        env.update({ 'CFLAGS': '-arch i386'})
-
-    os.chdir('cython')
-
+    chdir('cython')
+    run('python', './setup.py', 'clean')
     run('python', './setup.py', 'build')
 
-    print "***************************"
-    print "*****    ARCODE NOTE  *****"
-    print "***************************"
-    print "Make sure you PATH includes %s/deps/thirdparty-cython/cython/bin" % arcode_root
-    print "Make sure your PYTHONPATH includes %s/deps/thirdparty-cython/cython" % arcode_root
+    print "**************************"
+    print "*****  NOTE YE WELL  *****"
+    print "**************************"
+    print "Make sure you PATH includes %s/deps/thirdparty-cython/cython/bin" % get_root()
+    print "Make sure your PYTHONPATH includes %s/deps/thirdparty-cython/cython" % get_root()
