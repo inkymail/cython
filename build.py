@@ -15,7 +15,10 @@ if __name__ == '__main__':
     results = make_arg_parser_and_parse("build Cython")
 
     chdir('cython')
-    run('python', './setup.py', 'clean')
+    run('echo', 'rm', '-f', 'Cython/*.pyc')
+    run('rm', '-f', 'Cython/*/*.pyc')
+    run('rm', '-f', '*.pyc')
+    run('rm', '-rf', 'build')
     run('python', './setup.py', 'build')
 
     print "**************************"
