@@ -1,3 +1,4 @@
+*.pyc
 Cython-0.16/Cython/Compiler/AnalysedTreeTransforms.pyc
 Cython-0.16/Cython/Compiler/Annotate.pyc
 Cython-0.16/Cython/Compiler/AutoDocTransforms.pyc
