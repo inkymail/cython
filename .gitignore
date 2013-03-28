@@ -64,3 +64,13 @@ Cython-0.16/Cython/Utils.pyc
 Cython-0.16/Cython/__init__.pyc
 Cython-0.16/build/
 Cython-0.16/cython.pyc
+Cython-0.18/Cython/Compiler/Code.c
+Cython-0.18/Cython/Compiler/FlowControl.c
+Cython-0.18/Cython/Compiler/Lexicon.c
+Cython-0.18/Cython/Compiler/Parsing.c
+Cython-0.18/Cython/Compiler/Scanning.c
+Cython-0.18/Cython/Compiler/Visitor.c
+Cython-0.18/Cython/Plex/Actions.c
+Cython-0.18/Cython/Plex/Scanners.c
+Cython-0.18/Cython/Runtime/refnanny.c
+Cython-0.18/build/
