@@ -14,8 +14,6 @@ if __name__ == '__main__':
     # Parse command line args
     results = make_arg_parser_and_parse("build Cython")
 
-    chdir('cython')
-    run('echo', 'rm', '-f', 'Cython/*.pyc')
     run('rm', '-f', 'Cython/*/*.pyc')
     run('rm', '-f', '*.pyc')
     run('rm', '-rf', 'build')
